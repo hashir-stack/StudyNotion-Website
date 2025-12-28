@@ -26,7 +26,7 @@ import Catalog from './Pages/Catalog';
 import CourseDetails from './Pages/CourseDetails';
 import ViewCourse from './Pages/ViewCourse';
 import VideoDetails from './components/core/ViewCourse/VideoDetails';
-import InstructorDashboard from './components/core/InstructorDashboard';
+import InstructorDashboard from './components/core/InstructorDashboard/Instructor_Dashboard.jsx';
 
 
 const App = () => {
