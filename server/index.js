@@ -47,6 +47,8 @@ app.use("/api/v1/payment",paymentRoutes);
 app.use("/api/v1/course",courseRoutes);
 
 // activate the server
-app.listen(port,()=>{
-    console.log(`App is successfully running on ${port}`)
-})
+if(process.env.NODE_ENV !== "production"){
+  server.listen(port, () => {
+  console.log(`Server is successfully running on ${port}...`);
+  });
+}
