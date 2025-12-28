@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import NavBar from './components/common/NavBar';
@@ -27,7 +26,7 @@ import Catalog from './Pages/Catalog';
 import CourseDetails from './Pages/CourseDetails';
 import ViewCourse from './Pages/ViewCourse';
 import VideoDetails from './components/core/ViewCourse/VideoDetails';
-import InstructorDashboard from './components/core/InstructorDashboard/instructorDashboard';
+import InstructorDashboard from './components/core/InstructorDashboard';
 
 
 const App = () => {
