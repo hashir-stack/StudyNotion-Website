@@ -23,7 +23,7 @@ const courseRoutes = require("./routes/courseRoutes");
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin: "http://localhost:5173",
     credentials:true
 }));
 
@@ -47,8 +47,6 @@ app.use("/api/v1/payment",paymentRoutes);
 app.use("/api/v1/course",courseRoutes);
 
 // activate the server
-if(process.env.NODE_ENV !== "production"){
-  app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is successfully running on ${port}...`);
   });
-}
