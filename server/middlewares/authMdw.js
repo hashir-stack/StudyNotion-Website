@@ -6,10 +6,14 @@ require("dotenv").config();
 // Auth Middleware
 exports.auth = async (req, res, next) => {
   try {
+        const authHeader = req.headers["authorization"];
+
         const token =
         req.body?.token ||
         req.cookies?.Token ||
-        req.header("Authorization")?.replace("Bearer ", "");
+        // req.header("Authorization")?.replace("Bearer ", "");
+        (authHeader && authHeader.split(" ")[1]);
+
 
 
 
