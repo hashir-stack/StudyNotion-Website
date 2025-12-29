@@ -3,6 +3,7 @@ A MERN stack learning platform that allows students to register, log in, purchas
 🌐 Live Demo: study-notion-website-ruby.vercel.app
 
 🚀 Features
+
 - User Authentication: Register, log in, and manage profiles securely.
 - Course Management: Browse, purchase, and access courses.
 - Payment Gateway Integration:
