@@ -4,46 +4,88 @@ require("dotenv").config();
 
 
 // Auth Middleware
+// exports.auth = async (req, res, next) => {
+//   try {
+//         const authHeader = req.headers["authorization"];
+
+//         const token =
+//         req.body?.token ||
+//         req.cookies?.oken ||
+//         // req.header("Authorization")?.replace("Bearer ", "");
+//         (authHeader && authHeader.split(" ")[1]);
+
+
+
+
+//         if (!token) {
+//         return res.status(401).json({
+//             success: false,
+//             message: "Token is missing. Please generate a new token.",
+//         });
+//         }
+
+//         try {
+//         const decode = jwt.verify(token, process.env.JWT_SECRET);
+//         console.log("Decoded Token:", decode);
+//         req.user = decode;
+//         } catch (error) {
+//         return res.status(401).json({
+//             success: false,
+//             message: "Invalid Token...",
+//         });
+//         }
+
+//         next();
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Some Issue in validating token...",
+//     });
+//   }
+// };
 exports.auth = async (req, res, next) => {
   try {
-        const authHeader = req.headers["authorization"];
+    const authHeader = req.headers["authorization"];
 
-        const token =
-        req.body?.token ||
-        req.cookies?.token ||
-        // req.header("Authorization")?.replace("Bearer ", "");
-        (authHeader && authHeader.split(" ")[1]);
+    const token =
+      req.body?.token ||
+      req.cookies?.Token ||
+      (authHeader && authHeader.split(" ")[1]);
 
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Token is missing. Please log in again.",
+      });
+    }
 
-
-
-        if (!token) {
+    try {
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      console.log("Decoded Token:", decode);
+      req.user = decode;
+      next();
+    } catch (error) {
+      if (error.name === "TokenExpiredError") {
         return res.status(401).json({
-            success: false,
-            message: "Token is missing. Please generate a new token.",
+          success: false,
+          message: "Token expired. Please log in again.",
         });
-        }
-
-        try {
-        const decode = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("Decoded Token:", decode);
-        req.user = decode;
-        } catch (error) {
-        return res.status(401).json({
-            success: false,
-            message: "Invalid Token...",
-        });
-        }
-
-        next();
+      }
+      return res.status(401).json({
+        success: false,
+        message: "Invalid Token. Please log in again.",
+      });
+    }
   } catch (error) {
-    console.log(error);
+    console.error("Auth middleware error:", error);
     return res.status(500).json({
       success: false,
-      message: "Some Issue in validating token...",
+      message: "Server error while validating token.",
     });
   }
 };
+
 
 // IsStudents Middleware
 exports.IsStudent = async ( req,res, next )=>{
