@@ -4,8 +4,8 @@ const initialState = {
   signupData: null,
   loading: false,
   token: localStorage.getItem("token")
-    ? localStorage.getItem("token")
-    : null,
+    ?JSON.parse(localStorage.getItem("token"))
+    : null ,
 };
 
 const authSlice = createSlice({
