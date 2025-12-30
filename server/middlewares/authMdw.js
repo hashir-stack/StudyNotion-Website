@@ -50,7 +50,7 @@ exports.auth = async (req, res, next) => {
 
     const token =
       req.body?.token ||
-      req.cookies?.Token ||
+      req.cookies?.token ||
       (authHeader && authHeader.split(" ")[1]);
 
     if (!token) {
